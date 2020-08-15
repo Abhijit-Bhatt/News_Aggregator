@@ -1,36 +1,42 @@
-
-<mat-accordion>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-       <mat-icon>search</mat-icon> Search 
-      </mat-panel-title>
-      <mat-panel-description>
-        This is for searching for shit
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<mat-expansion-panel class="container" hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+     <mat-icon>search</mat-icon> Enter Parameters 
+    </mat-panel-title>
+    <mat-panel-description>
+      Search Guide
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  
+  <div class="search">
+    <mat-form-field >
+      <mat-label>Keywords</mat-label>
+      <input matInput type="text" [(ngModel)]="searchParameters">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Sources </mat-label>
+      <input matInput type="text" [(ngModel)] = "sources">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Language </mat-label>
+      <input matInput type="text" [(ngModel)] = "language">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Sources</mat-label>
+      <mat-select [formControl]="selected" multiple>
+        <mat-option *ngFor="let source of sourcesList" [value]="source">{{source}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     
-    <div class="search">
-      <h1>Enter Parameters:</h1>
-      <mat-form-field >
-        <mat-label>Keywords</mat-label>
-        <input matInput type="text" [(ngModel)]="searchParameters">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Sources </mat-label>
-        <input matInput type="text" [(ngModel)] = "sources">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label> Language </mat-label>
-        <input matInput type="text" [(ngModel)] = "language">
-      </mat-form-field>
-      
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" 
-      (click)="getter()">Submit</button>
-    </div>
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+    (click)="getter()">Submit</button>
+  </div>
 
-  </mat-expansion-panel>
-</mat-accordion>
+</mat-expansion-panel>
+
+<!-- <mat-accordion class="container">
+  
+</mat-accordion> -->
 
 
 <div *ngIf="this.load" >

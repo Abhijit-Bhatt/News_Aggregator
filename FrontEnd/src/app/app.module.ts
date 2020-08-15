@@ -24,6 +24,10 @@ import { SettingsComponent } from './settings/settings.component';
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 
+import {MatSelectModule} from '@angular/material/select'
+
+import {ReactiveFormsModule} from '@angular/forms'
+
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatExpansionModule,
     MatIconModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

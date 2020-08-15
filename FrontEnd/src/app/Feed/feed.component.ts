@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  // toggle: boolean
+
 
   constructor() { }
 

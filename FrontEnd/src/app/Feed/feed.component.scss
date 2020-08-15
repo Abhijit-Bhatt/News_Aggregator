@@ -1,9 +1,13 @@
-// .example-container {
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-//     left: 0;
-//     right: 0;
-//     background: #eee;
-//   }
+//  TODO: Have sidenav fill rest of screen (but do not overflow)
+
+.container {
+    height: 100%;
+    width: 100%;
+
+    background: #eee;
+  }
+
+.container mat-sidenav{
+    padding: 40px;
+}
   

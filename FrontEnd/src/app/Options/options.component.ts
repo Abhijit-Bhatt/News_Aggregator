@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-
+import { FormControl } from '@angular/forms'
 import { GetDataService } from '../services/GetDataService'
 
 
@@ -15,11 +15,18 @@ import { GetDataService } from '../services/GetDataService'
 })
 export class OptionsComponent implements OnInit {
 
+  // Display content 
   load: boolean
+
+  // Search parameters
   searchParameters: string
   sources: string
   language: string
 
+  selected = new FormControl()
+  sourcesList: string[] = ['cnn', 'fox-news', 'nbc-news']
+
+  // Data retreived from backend
   data: JSON
 
   constructor(private getData: GetDataService) {
