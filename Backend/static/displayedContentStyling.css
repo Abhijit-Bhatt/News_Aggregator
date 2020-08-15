@@ -1,0 +1,25 @@
+body{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.Articles{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Article{
+    max-width: 40vw;
+    margin: 10px;
+    padding: 5px;
+    background-color: beige;
+    border-radius: 5px;
+    border: 2px solid #cec2c2;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+
+.Article:hover{
+    border-color: aquamarine;
+}
