@@ -10,51 +10,19 @@ from NewsApiLibrary import *
 
 sourcesAndArticles = {}
 
-@app.route("/")
-def landingPageController():
-    return render_template("landingPage.html")
 
-@app.route("/options", methods=["GET", "POST"])
-def options():
-    if request.method == "POST":
-        searchFor = request.form['searchFor']
-        sources = request.form['source'].split(", ")
-        language = request.form['language']
-        getTopHeadline = request.form.get("topHeadlines")
-        getEverything = request.form.get("getEverything")
+@app.route("/display_content/<searchFor>&<sources>&<language>&<method>", methods=["GET", "POST"])
+def display_content(searchFor, sources, language, method):
+    newsInstance = NewsAPI()
 
-
-        if not getTopHeadline:
-            getTopHeadline = "off"
-
-        if not getEverything:
-            getEverything = "off"
-
-        print(type(sources))
-        print(searchFor)
-        print(language)
-        print(getTopHeadline)
-        print(getEverything)
-
-        return redirect(url_for('display_content', searchFor=searchFor, sources=sources, language=language, topHeadlines=getTopHeadline, getEverything=getEverything))
-    else:
-        return render_template("Options.html")
-
-@app.route("/display_content/<searchFor>&<sources>&<language>&<topHeadlines>&<getEverything>", methods=["GET", "POST"])
-def display_content(searchFor, sources, language, topHeadlines=None, getEverything=None):
     global sourcesAndArticles
 
-    print("in display content")
+    print(searchFor)
+    print(sources)
+    print(language)
+    print(method)
 
-    if request.method == "POST":
-        sourceSelection = request.form.get("ChooseNewsSource")
-        sources = sourcesAndArticles.keys()
-        index = sources.index(sourceSelection)
-        sources[0], sources[index] = sources[index], sources[0]
 
-        return render_template('displayedContent.html', sources=sources, articlesFromAllSources=[sourcesAndArticles[sourceSelection]])
-
-    newsInstance = NewsAPI()
 
     # Want to pass sources into the view fxn as a list using a ListConverter (Defined in flask documentation) --> for now using hacking method
     sources = utilities.generateListOfSources(sources)
@@ -63,35 +31,36 @@ def display_content(searchFor, sources, language, topHeadlines=None, getEverythi
     sourcesAndArticles.clear()
 
     try:
-        if topHeadlines == "on":
+        if method == "getTopHeadlines":
 
-            print("Displaying top headlines")
+            print(sources)
 
             sourcesAndArticles = {source:newsInstance.getTopHeadlines(searchFor, source, language)['articles'] for source in sources}
             return sourcesAndArticles
-            # return render_template('displayedContent.html', sources=sourcesAndArticles.keys(), articlesFromAllSources=sourcesAndArticles.values())
-        elif getEverything == "on":
+
+        elif method == "getEverything":
+
+            print(sources)
+
             sourcesAndArticles = {source:newsInstance.getEverything(searchFor, source, language)['articles'] for source in sources}
-            return render_template('displayedContent.html', sources=sourcesAndArticles.keys(), articlesFromAllSources=sourcesAndArticles.values())
+            return sourcesAndArticles
+
     except:
         abort(404)
 
 
 
-# @app.route("/full_content/<string:url>")
-# def full_content(url):
-#     print(url)
-#     try:
-#         fullContent = getHTML(url)
-#         with open('templates/fullContent.html', 'w') as file:
-#             file.write(fullContent.text)
-#         return render_template('fullContent.html')
-#
-#     except:
-#         abort(404)
 
 
 
+  # May use below code when posting to db
+  # if request.method == "POST":
+    #     sourceSelection = request.form.get("ChooseNewsSource")
+    #     sources = sourcesAndArticles.keys()
+    #     index = sources.index(sourceSelection)
+    #     sources[0], sources[index] = sources[index], sources[0]
+    #
+    #     return render_template('displayedContent.html', sources=sources, articlesFromAllSources=[sourcesAndArticles[sourceSelection]])
 
 
 

@@ -8,28 +8,11 @@ import requests
 def getHTML(url):
     return requests.get(url)
 
-class article():
-    def __init__(self, author=None, content=None, description=None, publishedAt=None, source=None, title=None, url=None, urlToImage=None):
-        self.author = author
-        self.content = content
-        self.description = description
-        self.publishedAt = publishedAt
-        self.source = source
-        self.title = title
-        self.url = url
-        self.urlToImage = urlToImage
-
-    def Parser(self):
-        pass
-
 
 class NewsAPI():
 
     newsapi = NewsApiClient(api_key='eb7394eb8fe74ed69529b9d9f22b524d')
 
-    def returnArticle(self, article):
-        return article(article['author'], article['content'], article['description'], article['publishedAt'], article['source'],
-                       article['title'], article['url'], article['urlToImage'])
 
     def getTopHeadlines(self, q, sources, language):
         return self.newsapi.get_top_headlines(q=q, sources=sources, language=language)
@@ -37,7 +20,20 @@ class NewsAPI():
     def getEverything(self, q, sources, language):
         return self.newsapi.get_everything(q=q, sources=sources, language=language)
 
-    def find_Trump(self, term, iterated):
+
+
+
+
+
+
+
+
+
+
+"""
+
+
+   def find_Trump(self, term, iterated):
         tally = 0
         if isinstance(iterated, list):
             for value in iterated:
@@ -70,19 +66,7 @@ class NewsAPI():
 
 
 
-
-
-
-if __name__ == "__main__":
-
-   pass
-
-
-
-
-    # newsInstance = NewsAPI()
-    # print(newsInstance.newsapi.get_everything(q='coronavirus', sources='fox-news', language='en'))
-
+"""
 
 
 

@@ -13,20 +13,24 @@
       <mat-label>Keywords</mat-label>
       <input matInput type="text" [(ngModel)]="searchParameters">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Sources </mat-label>
-      <input matInput type="text" [(ngModel)] = "sources">
+    <mat-form-field appearance="fill">
+      <mat-label>Sources</mat-label>
+      <mat-select [formControl]="selectedSources" multiple>
+        <mat-option *ngFor="let source of sourcesList" [value]="source">{{source}}</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label> Language </mat-label>
       <input matInput type="text" [(ngModel)] = "language">
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Sources</mat-label>
-      <mat-select [formControl]="selected" multiple>
-        <mat-option *ngFor="let source of sourcesList" [value]="source">{{source}}</mat-option>
+      <mat-label>What to get?</mat-label>
+      <mat-select [(ngModel)]="selectedAction">
+        <mat-option *ngFor= "let action of actionList" [value]="action.value">{{action.viewValue}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
+    
     
     <button mat-button matSuffix mat-icon-button aria-label="Clear" 
     (click)="getter()">Submit</button>
@@ -40,17 +44,21 @@
 
 
 <div *ngIf="this.load" >
-  <mat-card *ngFor="let item of this.data" class="card">
-    <mat-card-title>{{item["title"]}}</mat-card-title>
-    <mat-card-content>
-      <p> Author: {{item["author"]}}</p> 
-      <p> Content: {{item["content"]}}</p> 
-      <p> Description: {{item["description"]}}</p> 
-      <p> Published At: {{item["publishedAt"]}}</p> 
-      <p> Source: {{item["source"]}}</p> 
-      <p> url: <a href="{{item['url']}}"> {{item["url"]}} </a></p> 
-    </mat-card-content>
-  </mat-card>
+  <div *ngFor="let articlesFromSource of this.data | keyvalue">
+    <mat-card *ngFor="let item of articlesFromSource.value" class="card">
+      <mat-card-title>{{item["title"]}}</mat-card-title>
+      <mat-card-content>
+        <p> Author: {{item["author"]}}</p> 
+        <p> Content: {{item["content"]}}</p> 
+        <p> Description: {{item["description"]}}</p> 
+        <p> Published At: {{item["publishedAt"]}}</p> 
+        <p> Source: {{item["source"]}}</p> 
+        <p> url: <a href="{{item['url']}}"> {{item["url"]}} </a></p> 
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+ 
 </div>
 
 

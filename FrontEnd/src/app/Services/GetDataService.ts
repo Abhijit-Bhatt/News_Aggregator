@@ -12,9 +12,9 @@ export class GetDataService{
 
     constructor(private httpService: HttpClient){}
 
-    getData(searchFor, sources, language): Observable<JSON>  {
+    getData(searchFor, sources, language, method): Observable<JSON>  {
         
-        let urlWithParams: string = this.flaskUrl +  `${searchFor}&${sources}&${language}&on&None`
+        let urlWithParams: string = this.flaskUrl +  `${searchFor}&${sources}&${language}&${method}`
         return this.httpService.get<JSON>(urlWithParams)
     }
 

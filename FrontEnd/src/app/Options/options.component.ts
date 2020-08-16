@@ -2,7 +2,10 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms'
 import { GetDataService } from '../services/GetDataService'
 
-
+interface Action {
+  value: string
+  viewValue: string
+}
 
 @Component({
   selector: 'app-options',
@@ -20,11 +23,13 @@ export class OptionsComponent implements OnInit {
 
   // Search parameters
   searchParameters: string
-  sources: string
   language: string
 
-  selected = new FormControl()
+  selectedSources = new FormControl()
   sourcesList: string[] = ['cnn', 'fox-news', 'nbc-news']
+
+  actionList: Action[] = [{value:'getTopHeadlines', viewValue:'Get Top Headlines'}, {value:'getEverything', viewValue:'Get Everything'}]
+  selectedAction: string
 
   // Data retreived from backend
   data: JSON
@@ -40,11 +45,13 @@ export class OptionsComponent implements OnInit {
 
 
   getter(){
-    console.log(`${this.searchParameters} ${this.sources} ${this.language}`)
+    
 
-   this.getData.getData(this.searchParameters, this.sources, this.language).subscribe({
+    console.log(`${this.searchParameters} ${this.selectedSources.value} ${this.language} ${this.selectedAction}`)
+
+   this.getData.getData(this.searchParameters, this.selectedSources.value, this.language, this.selectedAction).subscribe({
       next: (data) => {
-        this.data = data[""]
+        this.data = data
         console.log(this.data)
       },
       error: err => {
