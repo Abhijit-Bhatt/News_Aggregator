@@ -3,8 +3,8 @@
     <mat-panel-title>
      <mat-icon>search</mat-icon> Enter Parameters 
     </mat-panel-title>
-    <mat-panel-description>
-      Search Guide
+    <mat-panel-description (click)="openDialog()">
+      Search Guide  
     </mat-panel-description>
   </mat-expansion-panel-header>
   
@@ -30,17 +30,20 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    
-    
-    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
-    (click)="getter()">Submit</button>
+  
+    <button mat-raised-button (click)="getter()">Submit</button>
   </div>
 
 </mat-expansion-panel>
 
-<!-- <mat-accordion class="container">
-  
-</mat-accordion> -->
+<mat-expansion-panel *ngIf="this.load" id="statistics" hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title> <mat-icon>keyboard_arrow_down</mat-icon></mat-panel-title>
+    <mat-panel-description> "-{{searchParameters}} -{{selectedSources.value}} -{{language}} -{{selectedAction}}" </mat-panel-description>
+  </mat-expansion-panel-header>
+</mat-expansion-panel>
+
+
 
 
 <div *ngIf="this.load" >

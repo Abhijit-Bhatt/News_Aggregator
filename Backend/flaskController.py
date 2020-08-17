@@ -23,8 +23,6 @@ def display_content(searchFor, sources, language, method):
     print(method)
 
 
-
-    # Want to pass sources into the view fxn as a list using a ListConverter (Defined in flask documentation) --> for now using hacking method
     sources = utilities.generateListOfSources(sources)
 
 

@@ -1,6 +1,8 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable} from '@angular/core';
+
 import { FormControl } from '@angular/forms'
 import { GetDataService } from '../services/GetDataService'
+import {MatDialog} from '@angular/material/dialog'
 
 interface Action {
   value: string
@@ -16,12 +18,12 @@ interface Action {
 @Injectable({
   providedIn: 'root'
 })
-export class OptionsComponent implements OnInit {
+export class OptionsComponent{
 
   // Display content 
   load: boolean
 
-  // Search parameters
+  // All parameters to enter
   searchParameters: string
   language: string
 
@@ -31,22 +33,26 @@ export class OptionsComponent implements OnInit {
   actionList: Action[] = [{value:'getTopHeadlines', viewValue:'Get Top Headlines'}, {value:'getEverything', viewValue:'Get Everything'}]
   selectedAction: string
 
-  // Data retreived from backend
+  // Data that is retreived from backend
   data: JSON
 
-  constructor(private getData: GetDataService) {
+  constructor(private getData: GetDataService, public dialog: MatDialog) {
     this.load = false
    }
 
-  ngOnInit(): void {
-  }
+  
+  openDialog() {
+    
+    const dialogRef = this.dialog.open(Infobox);
 
-  title = 'frontEndNewsAgg';
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
 
   getter(){
     
-
     console.log(`${this.searchParameters} ${this.selectedSources.value} ${this.language} ${this.selectedAction}`)
 
    this.getData.getData(this.searchParameters, this.selectedSources.value, this.language, this.selectedAction).subscribe({
@@ -60,11 +66,12 @@ export class OptionsComponent implements OnInit {
       }
     })
 
-
     this.load = true
-
-
-  }
-
-  
+  } 
 }
+
+@Component({
+  selector: 'info-box',
+  templateUrl: 'infobox.html'
+})
+export class Infobox{}

@@ -2,41 +2,37 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http'
-
-import { FormsModule } from '@angular/forms'
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatInputModule} from '@angular/material/input';
+import { AppComponent } from './app.component';
 import { OptionsComponent } from './options/options.component';
-import { DisplayNewsComponent } from './options/display-news/display-news.component'
-
-import {MatCardModule, MatCard} from '@angular/material/card';
 import { FeedComponent } from './feed/feed.component';
 import { WelcomeComponent } from './welcome/welcome.component'
-
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
 import { SettingsComponent } from './settings/settings.component';
+import {Infobox} from './options/options.component';
 
+import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
+
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
-
-import {MatSelectModule} from '@angular/material/select'
-
-import {ReactiveFormsModule} from '@angular/forms'
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     OptionsComponent,
-    DisplayNewsComponent,
     FeedComponent,
     WelcomeComponent,
-    SettingsComponent
+    SettingsComponent,
+    Infobox
   ],
   imports: [
     BrowserModule,
@@ -51,7 +47,9 @@ import {ReactiveFormsModule} from '@angular/forms'
     MatDividerModule,
     MatSidenavModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
