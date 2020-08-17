@@ -9,15 +9,6 @@ class TestnewsAPI(unittest.TestCase):
     def test_AnotherTestBlock(self):
         self.assertTrue(True)
 
-    # NEED BETTER WAY TO TEST
-    def test_getHTML(self):
-        try:
-            with open("tester_putHTML.html", 'w') as tester:
-                tester.write(article(url='https://www.foxnews.com/media/peter-navarro-walks-back-china-trade-deal').getHTML().text)
-
-            self.assertTrue(True)
-        except:
-            self.assertTrue(False)
 
     def test_WorkingWithUnicodeFormattedStrings(self, unicodeFormattedStringList=[u'fox-news', u'nbc-news', u'cnn-news'], string="fox-news, cnn-news, nbc-news"):
         try:
@@ -46,7 +37,3 @@ class TestnewsAPI(unittest.TestCase):
         with open('tester_putHTML.html', 'w') as tester:
             tester.write(test_article.text)
 
-
-if __name__ == "__main__":
-    print(str(article(url='https://www.cnn.com/2020/06/11/politics/icc-executive-order/index.html').getHTML()))
-    # unittest.main()

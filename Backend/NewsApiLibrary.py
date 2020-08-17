@@ -1,8 +1,7 @@
 from newsapi import NewsApiClient
 import requests
+from Secrets import api_key
 
-
-# api-key: eb7394eb8fe74ed69529b9d9f22b524d
 
 
 def getHTML(url):
@@ -11,7 +10,7 @@ def getHTML(url):
 
 class NewsAPI():
 
-    newsapi = NewsApiClient(api_key='eb7394eb8fe74ed69529b9d9f22b524d')
+    newsapi = NewsApiClient(api_key=api_key)
 
 
     def getTopHeadlines(self, q, sources, language):
@@ -32,6 +31,7 @@ class NewsAPI():
 
 """
 
+Fxn logic we can use in the future?
 
    def find_Trump(self, term, iterated):
         tally = 0
@@ -70,23 +70,7 @@ class NewsAPI():
 
 
 
-"""
 
-    for key, value in top_headlines_Fox.items():
-        print(key, '->', value)
-
-    print('\n')
-
-    for key, value in top_headlines_CNN.items():
-        print(key, '->', value)
-
-
-    Fox_Tally = newsInstance.find_Trump('coronavirus', top_headlines_Fox)
-    CNN_Tally = newsInstance.find_Trump('coronavirus', top_headlines_CNN)
-
-    print("\n", "Fox Tally:", Fox_Tally, "CNN Tally:", CNN_Tally)
-
-"""
 
 
 
